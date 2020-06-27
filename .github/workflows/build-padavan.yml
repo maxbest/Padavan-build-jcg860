@@ -32,7 +32,7 @@ jobs:
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget
     - name: Clone source code
       run: |
-        git clone --depth=1 https://github.com/chongshengB/rt-n56u.git /opt/rt-n56u
+        git clone --depth=1 https://github.com/maxbest/rt-n56u.git /opt/rt-n56u
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
         mkdir -p /opt/images/
@@ -70,6 +70,7 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL/d' .config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_TRANSMISSION/d' .config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_TRANSMISSION_WEB_CONTROL/d' .config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_VLMCSD/d' .config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_XUNLEI/d' .config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_KMS/d' .config
         ######################################################################
@@ -107,6 +108,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL=y" >> .config #Include Aria2 WEB control
         echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION=y" >> .config #Include Transmission download
         echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION_WEB_CONTROL=y" >> .config #Include Transmission WEB control
+        echo "CONFIG_FIRMWARE_INCLUDE_VLMCSD=y" >> .config #Include kms NEW
         echo "CONFIG_FIRMWARE_INCLUDE_XUNLEI=y" >> .config #Include xunlei WEB control
         echo "CONFIG_FIRMWARE_INCLUDE_KMS=y" >> .config #Include xunlei WEB control
         #########################################################################################

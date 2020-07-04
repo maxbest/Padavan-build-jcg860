@@ -38,7 +38,7 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: NEWIFI3
+        TNAME: JCG-AC860M-5.0
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
@@ -68,12 +68,8 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_ZEROTIER/d' .config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_ARIA/d' .config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL/d' .config
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_TRANSMISSION/d' .config
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_TRANSMISSION_WEB_CONTROL/d' .config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_VLMCSD/d' .config
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_XUNLEI/d' .config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_KMS/d' .config
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_OPENVPN/d' .config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_V2RAY/d' .config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_TROJAN/d' .config
         ######################################################################
@@ -88,15 +84,14 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SSSERVER=n" >> .config #SS server
         echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #DNSFORWARDER
         echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config #adbyby plus+
-        echo "CONFIG_FIRMWARE_INCLUDE_FRPC=y" >> .config #内网穿透FRPC
-        echo "CONFIG_FIRMWARE_INCLUDE_FRPS=y" >> .config #内网穿透FRPS
-        echo "CONFIG_FIRMWARE_INCLUDE_TUNSAFE=y" >> .config #TUNSAFE
+        echo "CONFIG_FIRMWARE_INCLUDE_FRPC=n" >> .config #内网穿透FRPC
+        echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config #内网穿透FRPS
+        echo "CONFIG_FIRMWARE_INCLUDE_TUNSAFE=n" >> .config #TUNSAFE
         echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=y" >> .config #阿里DDNS
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN=y" >> .config #smartdns二进制文件
         echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=y" >> .config #v2ray二进制文件
         echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=y" >> .config #集成trojan执行文件，如果不集成，会从网上下载下来执行，不影响正常使用
-        echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=y" >> .config #KP广告过滤
         echo "CONFIG_FIRMWARE_INCLUDE_CADDY=y" >> .config #在线文件管理服务
         echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config #集成caddu执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_KUMASOCKS=y" >> .config
@@ -105,16 +100,10 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_MICROSOCKS=y" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_SRELAY=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_WYY=y" >> .config #网易云解锁
-        echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=y" >> .config #网易云解锁GO版本执行文件（4M多）注意固件超大小
+        echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=n" >> .config #网易云解锁GO版本执行文件（4M多）注意固件超大小
         echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=y" >> .config #zerotier ~1.3M
         echo "CONFIG_FIRMWARE_INCLUDE_ARIA=y" >> .config #Include Aria2 download manager. openssl
         echo "CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL=y" >> .config #Include Aria2 WEB control
-        echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION=y" >> .config #Include Transmission download
-        echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION_WEB_CONTROL=y" >> .config #Include Transmission WEB control
-        echo "CONFIG_FIRMWARE_INCLUDE_VLMCSD=y" >> .config #Include kms NEW
-        echo "CONFIG_FIRMWARE_INCLUDE_XUNLEI=y" >> .config #Include xunlei WEB control
-        echo "CONFIG_FIRMWARE_INCLUDE_KMS=y" >> .config #Include xunlei WEB control
-        echo "CONFIG_FIRMWARE_INCLUDE_OPENVPN=y" >> .config #Include xunlei WEB control
         #########################################################################################
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
         #格式如下：
